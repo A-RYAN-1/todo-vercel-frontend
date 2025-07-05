@@ -8,7 +8,7 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("All");
 
-  const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const baseUrl = "https://todo-backend-s7wx.onrender.com";
 
 const getTodos = async () => {
   try {
