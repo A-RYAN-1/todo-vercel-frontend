@@ -8,15 +8,18 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("All");
 
-  const getTodos = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/todos");
-      const jsonData = await response.json();
-      setTodos(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+const getTodos = async () => {
+  try {
+    const response = await fetch(`${baseUrl}/todos`);
+    const jsonData = await response.json();
+    setTodos(jsonData);
+  } catch (err) {
+    console.error("Failed to fetch todos:", err.message);
+  }
+};
+
 
   useEffect(() => {
     getTodos();
