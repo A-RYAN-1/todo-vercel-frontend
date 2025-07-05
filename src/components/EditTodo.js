@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 
+const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const EditTodo = ({ todo, getTodos, setEditingTodoId, isEditing }) => {
   const [description, setDescription] = useState(todo.description);
   const [dueDate, setDueDate] = useState(
@@ -20,14 +22,11 @@ const EditTodo = ({ todo, getTodos, setEditingTodoId, isEditing }) => {
     }
     try {
       const body = { description, due_date: dueDate, priority };
-      const response = await fetch(
-        `http://localhost:5000/todos/${todo.todo_id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(`${baseUrl}/todos/${todo.todo_id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(

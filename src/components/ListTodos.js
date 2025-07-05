@@ -1,12 +1,14 @@
 import React, { Fragment, useState } from "react";
 import EditTodo from "./EditTodo";
 
+const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const ListTodos = ({ todos, getTodos }) => {
   const [editingTodoId, setEditingTodoId] = useState(null);
 
   const deleteTodo = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/todos/${id}`, {
+      const response = await fetch(`${baseUrl}/todos/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete todo");

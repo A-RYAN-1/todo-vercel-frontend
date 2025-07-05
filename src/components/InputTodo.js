@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 
+const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const InputTodo = ({ getTodos }) => {
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -18,7 +20,7 @@ const InputTodo = ({ getTodos }) => {
     }
     try {
       const body = { description, due_date: dueDate, priority };
-      const response = await fetch("http://localhost:5000/todos", {
+      const response = await fetch(`${baseUrl}/todos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
